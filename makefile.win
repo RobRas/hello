@@ -1,10 +1,13 @@
+FLEX_SDK=~\Flex
+
 APP=hello
 APP_XML=$(APP).xml
-ADL=$(FLEX)/bin/adl
-AMXMLC=$(FLEX)/bin/amxmlc
+ADL=$(FLEX_SDK)/bin/adl
+AMXMLC=$(FLEX_SDK)/bin/amxmlc
 SOURCES=src/Startup.hx
+
 all: $(APP).swf
-$(APP).swf $(SOURCES)
+$(APP).swf: $(SOURCES)
 	haxe \
 	-cp src \
 	-cp vendor \

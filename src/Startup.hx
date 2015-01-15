@@ -1,5 +1,5 @@
 class Startup {
-	public static main():Void {
+	public static function main():Void {
 		trace("Hello, World!");
 	}
 }
