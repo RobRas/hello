@@ -1,11 +1,5 @@
-package;
-
-/**
- * ...
- * @author Robert Rasmussen
- */
 class Startup {
-	public static main() {
+	public static main():Void {
 		trace("Hello, World!");
 	}
 }
