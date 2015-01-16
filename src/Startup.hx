@@ -1,5 +1,49 @@
-class Startup {
-	public static function main():Void {
-		trace("Hello, World!");
+import flash.display.Bitmap;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.geom.Rectangle;
+import flash.Lib;
+import haxe.rtti.CType.TypeRoot;
+import starling.core.Starling;
+
+@:bitmap("assets/loading.png")
+class LoadingBitmapData extends flash.display.BitmapData { }
+
+class Startup extends Sprite {
+	public var loadingBitmap:Bitmap;
+	
+	function new() {
+		super();
+		loadingBitmap = new Bitmap(new LoadingBitmapData(0, 0));
+		loadingBitmap.x = 0;
+		loadingBitmap.y = 0;
+		loadingBitmap.width = Lib.current.stage.stageWidth;
+		loadingBitmap.height = Lib.current.stage.stageHeight;
+		loadingBitmap.smoothing = true;
+		addChild(loadingBitmap);	//To display on scene
+		
+		flash.Lib.current.stage.addEventListener(Event.RESIZE, function(e:Event) {
+			Starling.current.viewPort = new Rectangle(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
+			if (loadingBitmap != null) {
+				loadingBitmap.width = Lib.current.stage.stageWidth;
+				loadingBitmap.height = Lib.current.stage.stageHeight;
+			}
+		});
+		
+		var mStarling = new Starling(Root, Lib.current.stage);
+		mStarling.antiAliasing = 0;
+		
+		function onRootCreated(event:Dynamic, root:Root) {
+			mStarling.removeEventListener(Starling.events.Event.ROOT_CREATED, onRootCreated);
+			root.start(this);
+			mStarling.start();
+		}
+		
+		mStarling.addEventListener(Starling.events.Event.ROOT_CREATED, onRootCreated);
+	}
+	
+	static function main() {
+		var stage = Lib.current.stage;
+		stage.addChild(new Startup());
 	}
 }
