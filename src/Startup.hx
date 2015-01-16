@@ -3,7 +3,6 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Rectangle;
 import flash.Lib;
-import haxe.rtti.CType.TypeRoot;
 import starling.core.Starling;
 
 @:bitmap("assets/loading.png")
@@ -34,12 +33,12 @@ class Startup extends Sprite {
 		mStarling.antiAliasing = 0;
 		
 		function onRootCreated(event:Dynamic, root:Root) {
-			mStarling.removeEventListener(Starling.events.Event.ROOT_CREATED, onRootCreated);
+			mStarling.removeEventListener(starling.events.Event.ROOT_CREATED, onRootCreated);
 			root.start(this);
 			mStarling.start();
 		}
 		
-		mStarling.addEventListener(Starling.events.Event.ROOT_CREATED, onRootCreated);
+		mStarling.addEventListener(starling.events.Event.ROOT_CREATED, onRootCreated);
 	}
 	
 	static function main() {
